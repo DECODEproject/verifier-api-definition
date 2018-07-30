@@ -1,0 +1,55 @@
+---
+swagger: "2.0"
+info:
+  description: "Verifier API definition"
+  version: "1.0.0"
+  title: "Verifier API"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+schemes:
+- "https"
+- "http"
+paths:
+  /verify:
+    post:
+      summary: "Verifies the DNI is in the list of valid users"
+      operationId: "verify"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User DNI to be verified"
+        required: true
+        schema:
+          $ref: "#/definitions/VerifyRequest"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/VerifyResponse"
+      x-swagger-router-controller: "Default"
+definitions:
+  VerifyRequest:
+    type: "object"
+    required:
+    - "dni"
+    properties:
+      dni:
+        type: "string"
+        example: "12345678A"
+    example:
+      dni: "12345678A"
+  VerifyResponse:
+    type: "object"
+    properties:
+      ok:
+        type: "boolean"
+        default: true
+      error:
+        type: "string"
+        example: ""
+        default: ""
