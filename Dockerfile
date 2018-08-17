@@ -9,4 +9,5 @@ FROM node:10.7.0-alpine
 WORKDIR /code
 COPY --from=0 /out/server .
 RUN npm install
+EXPOSE 8080
 CMD ["npm", "start"]
